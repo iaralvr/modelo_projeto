@@ -2,6 +2,7 @@ import { Alert, Box, Button, Checkbox, Container, FormControlLabel, Grid, TextFi
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { useNavigate, json } from 'react-router-dom';
+import Cadastro from './Cadastro';
 
 
 
@@ -30,7 +31,7 @@ function Login() {
   function Autenticar( evento )
   {
     evento.preventDefault();
-    fetch( "http://10.139.75.32:8080/login", {
+    fetch(  process.env.REACT_APP_BACKEND + "login", {
         method: "POST",
         headers: {
             'Content-Type': 'application/json'
@@ -69,7 +70,8 @@ function Login() {
         }}
         >
             <Typography component="h1" variant='h4'>Entrar</Typography>
-            { erro && ( <Alert severity="warning" sx={{ mt: 2, mb: 2 }}>Revise seus dados e tente novamente</Alert> ) }
+            { erro && ( <Alert severity="warning" sx={{ mt: 2, mb: 2 }}>Revise seus dados e tente novamente, por favor!</Alert> ) }
+            {Cadastro && ( <Alert severity='success'>Obrigada por cadastrar seu filme!</Alert>)}
             <Box component="form" onSubmit={Autenticar}>
                 <TextField 
                   type="email"
